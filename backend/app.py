@@ -88,7 +88,7 @@ Focus on helping the student stand out by emphasizing their individuality and pa
 @app.route('/essay_feedback', methods=['POST'])
 def essay_feedback():
     data = request.get_json()
-    list_of_questions = data['list_of_questions']
+    list_of_questions = data.get('list_of_questions')
     essay = data['essay']
     essay_prompt = data['essay_prompt']
 
@@ -116,13 +116,11 @@ Your task is to help the student craft a compelling and unique essay for their c
   "Pretend this <comment1> is a short <comment2> essay. {commentary}"
 
 - The primary focus should be on helping the student create a compelling, thematic, and relevant narrative that would appeal to a college admissions officer.
-- Maintain a constructive and encouraging tone throughout the feedback, guiding the student toward improving their essay without directly making changes.
+- Maintain a constructive and encouraging tone throughout the feedback, guiding the student toward improving their essay.
 
-Here is a transcript of the initial conversation between the advisor and the student:
-
-        """.strip()
+        """.strip() + ("Here is a transcript of the initial conversation between the advisor and the student:" if list_of_questions else "")
         },
-        *convert_questions_to_preprompt(list_of_questions),
+        *(convert_questions_to_preprompt(list_of_questions) if list_of_questions else ()),
         {
             "role": "user",
             "content": "Based on our conversation, please help me refine my essay outline for my college application essay answering the below question: \n\n"
