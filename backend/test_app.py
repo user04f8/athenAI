@@ -1,7 +1,8 @@
-import openai
+from typing import Literal
 from flask import Flask, Response, request
 from dotenv import load_dotenv
 import openai
+# from openai.types import 
 import os
 
 from prompts import *
@@ -37,14 +38,28 @@ def generate_openai_stream(prompt):
         # Each chunk is a dictionary containing choices and their text
         yield chunk['choices'][0]['text']
 
-@app.route('/generate', methods=['POST'])
-def generate():
+question_with_response_type = dict[Literal["question" | "response"], str]
+preprompt_type = dict[Literal["user" | "assistant"], str]
+
+def convert_questions_to_preprompt(question_response: list[question_with_response_type]) -> list[preprompt_type]:
+    pass
+
+
+def generate_question_from(question_response: list[question_with_response_type]):
+    pass
+
+
+@app.route('/generate_question', methods=['POST'])
+def generate_question():
     """
     Endpoint to handle POST requests for OpenAI completion generation.
     Expects JSON with a 'prompt' key in the request body.
     """
     data = request.get_json()
+    
     prompt = data.get('prompt', '')
+
+    question = generate_question_from()
 
     # Stream the output as text/event-stream
     return Response(generate_openai_stream(prompt), mimetype='text/event-stream')
