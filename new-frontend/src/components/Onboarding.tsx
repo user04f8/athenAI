@@ -80,10 +80,10 @@ export default function Orientation() {
     try {
       // Construct the list_of_questions payload
       const list_of_questions: QuestionWithResponse[] = answers.map((answer, index) => ({
-        question: questions[index],
+        question: questions[index] ?? 'Question?',
         response: answer
       }))
-      const response = await fetch('/generate_question', {
+      const response = await fetch('http://127.0.0.1:5000/generate_question', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ export default function Orientation() {
     } catch (error) {
       console.error('Error fetching next question:', error)
     } finally {
-      setIsFetching(false)
+        setTimeout(() => setIsFetching(false), 40)
     }
   }
 
@@ -158,13 +158,19 @@ export default function Orientation() {
                 <div className="flex-shrink-0 mr-2">
                   <Bot className="text-gray-800 w-7 h-7" aria-hidden="true" />
                 </div>
-                <p className="font-semibold text-gray-800 text-lg">{displayedQuestion}</p>
+                <p className="font-semibold text-gray-800 text-lg">{isFetching ? "..." : displayedQuestion}</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <textarea
                   ref={inputRef}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSubmit(e);
+                    }
+                  }}
                   className="w-full px-4 py-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 min-h-[100px] resize-y bg-purple-50 text-gray-900 placeholder-gray-400 transition duration-300 ease-in-out"
                   placeholder="Type your answer here..."
                 />
