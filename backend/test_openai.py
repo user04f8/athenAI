@@ -7,10 +7,12 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 client = openai.OpenAI()
 
-SYSTEM_PREPROMPT_BASE = \
+SYSTEM_PROMPT_BASE = \
 """
 You are a helpful assistant.
 """
+
+
 
 def generate_prompt():
     completion = client.chat.completions.create(
@@ -18,7 +20,7 @@ def generate_prompt():
         messages=[
             {
                 "role": "system",
-                "content": SYSTEM_PREPROMPT_BASE,
+                "content": SYSTEM_PROMPT_BASE,
             },
             {
                 "role": "user",
