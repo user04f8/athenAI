@@ -38,17 +38,6 @@ def generate_openai_stream(prompt):
         # Each chunk is a dictionary containing choices and their text
         yield chunk['choices'][0]['text']
 
-question_with_response_type = dict[Literal["question" | "response"], str]
-preprompt_type = dict[Literal["user" | "assistant"], str]
-
-def convert_questions_to_preprompt(question_response: list[question_with_response_type]) -> list[preprompt_type]:
-    pass
-
-
-def generate_question_from(question_response: list[question_with_response_type]):
-    pass
-
-
 @app.route('/generate_question', methods=['POST'])
 def generate_question():
     """
@@ -62,7 +51,20 @@ def generate_question():
     question = generate_question_from()
 
     # Stream the output as text/event-stream
-    return Response(generate_openai_stream(prompt), mimetype='text/event-stream')
+    return Response(client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {
+                "role": "system",
+                "content": SYSTEM_PROMPT_v0,
+            },
+            {
+                "role": "user",
+                "content": prompt,
+            },
+        ],
+        max_tokens=10,
+    ), mimetype='text/event-stream')
 
 if __name__ == '__main__':
     app.run(debug=True)
