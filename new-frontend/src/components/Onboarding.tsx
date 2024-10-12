@@ -4,12 +4,15 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
 
+
 const questions = [
   "What's your name?",
   "What's your intended major?",
   "What's your biggest academic achievement?",
   "What's a challenge you've overcome?"
 ]
+
+const lastQuestionIndex = questions.length - 1
 
 export default function Orientation() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -45,7 +48,7 @@ export default function Orientation() {
     setAnswers([...answers, inputValue])
     setInputValue('')
 
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < lastQuestionIndex) {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
   }
@@ -112,7 +115,7 @@ export default function Orientation() {
             </AnimatePresence>
           </div>
 
-          {currentQuestionIndex < questions.length && (
+          {currentQuestionIndex <= lastQuestionIndex && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -143,7 +146,7 @@ export default function Orientation() {
             </motion.div>
           )}
 
-          {currentQuestionIndex === questions.length && (
+          {currentQuestionIndex == lastQuestionIndex && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
