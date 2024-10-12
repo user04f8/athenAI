@@ -12,10 +12,10 @@ type QuestionWithResponse = {
 }
 
 const baseQuestions: string[] = [
-  "What's your name?",
-  "What's your intended major?",
-  "What's your biggest academic achievement?",
-  "What's a challenge you've overcome?"
+  "Tell me about yourself.",
+  "What are your goals after highschool (Acedemic, or otherwise)?",
+  "What subjects are you struggling with, if any?",
+  "Have you thought about any specific colleges youd like to apply to?"
 ]
 
 export default function Orientation() {
