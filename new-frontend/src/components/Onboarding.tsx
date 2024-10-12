@@ -4,6 +4,10 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { Progress } from './ui/progress'
+
+
+const TOTAL_QUESTIONS = 16
 
 // Define the type for questions with response
 type QuestionWithResponse = {
@@ -26,12 +30,17 @@ export default function Orientation() {
   const [displayedQuestion, setDisplayedQuestion] = useState('')
   const [continueAsking, setContinueAsking] = useState(true)
   const [isFetching, setIsFetching] = useState(false) // To prevent multiple fetches
+  const [progress, setProgress] = useState(0)
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus()
     }
+  }, [currentQuestionIndex])
+
+  useEffect(() => {
+    setProgress((currentQuestionIndex / TOTAL_QUESTIONS) * 100 )
   }, [currentQuestionIndex])
 
   useEffect(() => {
@@ -43,7 +52,7 @@ export default function Orientation() {
       } else {
         clearInterval(interval)
       }
-    }, 50)
+    }, 25)
 
     return () => clearInterval(interval)
   }, [currentQuestionIndex, questions])
@@ -146,7 +155,9 @@ export default function Orientation() {
           <p className="text-gray-600 mb-8">
             Welcome to our college essay writing orientation! This process will help us understand your background and goals.
           </p>
-
+          <div className="mb-8">
+            <Progress value={progress} className="w-full"/>
+          </div>
           <div className="space-y-6 mb-8">
             <AnimatePresence>
               {answers.map((answer, index) => (
