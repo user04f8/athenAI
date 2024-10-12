@@ -65,7 +65,7 @@ export default function Orientation() {
                   Orientation
                 </a>
                 <a href="#" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  Resources
+                  Essay Editor
                 </a>
                 <a href="#" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
                   About
