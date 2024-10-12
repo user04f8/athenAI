@@ -73,16 +73,16 @@ export default function EssayEditor() {
           transition={{ duration: 0.5 }}
           className="w-full max-w-4xl bg-white rounded-lg shadow-2xl p-8"
         >
-          <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">College Essay Editor</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">Essay Editor</h2>
           
           <div className="space-y-6 mb-8">
             <div>
-              <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-2">Select Essay Prompt</label>
+              <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-2">Select Prompt</label>
               <Select onValueChange={setSelectedPrompt}>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full min-h-[50px]">
                   <SelectValue placeholder="Choose a prompt" />
                 </SelectTrigger>
-                <SelectContent className="max-h-[300px] overflow-y-auto">
+                <SelectContent className="max-h-[400px] overflow-y-auto">
                   {prompts.map((prompt, index) => (
                     <SelectItem key={index} value={prompt} className="whitespace-normal py-2 border-b last:border-b-0">
                       <div className="break-words">{prompt}</div>
