@@ -89,9 +89,9 @@ def test_generate_essay_outline():
     test_api('generate_essay_outline', SAMPLE_QUESTION_DATA)
 
 def test_essay_feedback():
-    test_api('essay_feedback', SAMPLE_QUESTION_DATA)
+    test_api('essay_feedback', SAMPLE_ESSAY_DATA)
 
 if __name__ == '__main__':
-    test_generate_essay_outline()
+    test_essay_feedback()
 
 
