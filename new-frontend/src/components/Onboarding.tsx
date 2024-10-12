@@ -119,8 +119,10 @@ export default function Orientation() {
               transition={{ duration: 0.5 }}
             >
               <div className="flex items-center mb-3">
-                <Bot className="text-gray-800 mr-2 w-7 h-7 align-middle"/>
-                <p className="font-semibold mb-3 text-gray-800 text-lg h-8 align-middle">{displayedQuestion}</p>
+                <div className="flex-shrink-0 mr-2">
+                  <Bot className="text-gray-800 w-7 h-7" aria-hidden="true" />
+                </div>
+                <p className="font-semibold text-gray-800 text-lg">{displayedQuestion}</p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <textarea
