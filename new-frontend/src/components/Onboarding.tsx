@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 
 const questions = [
@@ -61,15 +62,15 @@ export default function Orientation() {
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
                 <BookOpen className="h-8 w-8 text-purple-500" />
-                <span className="ml-2 text-xl font-bold text-purple-600">Athena Prep</span>
+                <span className="ml-2 text-xl font-bold text-purple-600">AthenaPrep</span>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <a href="#" className="border-b-2 border-purple-500 text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
                   Orientation
                 </a>
-                <a href="#" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
+                <Link to="/essay-editor" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
                   Essay Editor
-                </a>
+                </Link>
                 <a href="#" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
                   About
                 </a>
