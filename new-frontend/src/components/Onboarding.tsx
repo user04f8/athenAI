@@ -6,7 +6,7 @@ import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 
-const questions = [
+const baseQuestions = [
   "What's your name?",
   "What's your intended major?",
   "What's your biggest academic achievement?",
@@ -29,8 +29,8 @@ export default function Orientation() {
   useEffect(() => {
     let currentIndex = 0
     const interval = setInterval(() => {
-      if (currentIndex <= questions[currentQuestionIndex].length) {
-        setDisplayedQuestion(questions[currentQuestionIndex].slice(0, currentIndex))
+      if (currentIndex <= baseQuestions[currentQuestionIndex].length) {
+        setDisplayedQuestion(baseQuestions[currentQuestionIndex].slice(0, currentIndex))
         currentIndex++
       } else {
         clearInterval(interval)
@@ -47,7 +47,7 @@ export default function Orientation() {
     setAnswers([...answers, inputValue])
     setInputValue('')
 
-    if (currentQuestionIndex <= questions.length - 1) {
+    if (currentQuestionIndex <= baseQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
   }
@@ -107,14 +107,14 @@ export default function Orientation() {
                   transition={{ duration: 0.5 }}
                   className="bg-purple-50 p-4 rounded-lg"
                 >
-                  <p className="font-semibold text-purple-700 mb-2">{questions[index]}</p>
+                  <p className="font-semibold text-purple-700 mb-2">{baseQuestions[index]}</p>
                   <p className="text-gray-700">{answer}</p>
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
 
-          {currentQuestionIndex <= questions.length - 1 && (
+          {currentQuestionIndex <= baseQuestions.length - 1 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -145,7 +145,7 @@ export default function Orientation() {
             </motion.div>
           )}
 
-          {currentQuestionIndex == questions.length && (
+          {currentQuestionIndex == baseQuestions.length && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
