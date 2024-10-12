@@ -13,8 +13,6 @@ const questions = [
   "What's a challenge you've overcome?"
 ]
 
-const lastQuestionIndex = questions.length - 1
-
 export default function Orientation() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<string[]>([])
@@ -49,7 +47,7 @@ export default function Orientation() {
     setAnswers([...answers, inputValue])
     setInputValue('')
 
-    if (currentQuestionIndex < lastQuestionIndex) {
+    if (currentQuestionIndex <= questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
   }
@@ -116,7 +114,7 @@ export default function Orientation() {
             </AnimatePresence>
           </div>
 
-          {currentQuestionIndex <= lastQuestionIndex && (
+          {currentQuestionIndex <= questions.length - 1 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -147,7 +145,7 @@ export default function Orientation() {
             </motion.div>
           )}
 
-          {currentQuestionIndex == lastQuestionIndex && (
+          {currentQuestionIndex == questions.length && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
