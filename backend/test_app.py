@@ -4,9 +4,13 @@ from dotenv import load_dotenv
 import openai
 import os
 
+from prompts import *
+
 # Load environment variables from the .env file
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+client = openai.OpenAI()
 
 app = Flask(__name__)
 
@@ -14,12 +18,20 @@ def generate_openai_stream(prompt):
     """
     Generator function to yield chunks of OpenAI's streamed response.
     """
-    response = openai.Completion.create(
-        model="",
-        prompt=prompt,
-        max_tokens=150,
-        temperature=0.5,
-        stream=True  # Enables streaming
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {
+                "role": "system",
+                "content": SYSTEM_PROMPT_v0,
+            },
+            {
+                "role": "user",
+                "content": prompt,
+            },
+        ],
+        max_tokens=100,
+        stream=True
     )
     for chunk in response:
         # Each chunk is a dictionary containing choices and their text
