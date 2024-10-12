@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, User, ChevronRight } from 'lucide-react'
+import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
 
 const questions = [
   "What's your name?",
@@ -58,7 +58,7 @@ export default function Orientation() {
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
                 <BookOpen className="h-8 w-8 text-purple-500" />
-                <span className="ml-2 text-xl font-bold text-purple-600">EssayPro</span>
+                <span className="ml-2 text-xl font-bold text-purple-600">Athena Prep</span>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <a href="#" className="border-b-2 border-purple-500 text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
@@ -118,7 +118,10 @@ export default function Orientation() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <p className="font-semibold mb-3 text-gray-800 text-lg h-8">{displayedQuestion}</p>
+              <div className="flex items-center mb-3">
+                <Bot className="text-gray-800 mr-2 w-7 h-7 align-middle"/>
+                <p className="font-semibold mb-3 text-gray-800 text-lg h-8 align-middle">{displayedQuestion}</p>
+              </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <textarea
                   ref={inputRef}
