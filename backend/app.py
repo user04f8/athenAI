@@ -84,4 +84,4 @@ Focus on helping the student stand out by emphasizing their individuality and pa
     return Response(generate(), mimetype='text/event-stream')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
