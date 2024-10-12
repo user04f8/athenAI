@@ -1,7 +1,7 @@
 import requests
 from questions import convert_questions_to_preprompt
 
-SAMPLE_DATA = {
+SAMPLE_QUESTION_DATA = {
     "list_of_questions": [
   {
     "question": "Tell me about yourself.",
@@ -38,14 +38,44 @@ SAMPLE_DATA = {
 ]
 }
 
+SAMPLE_ESSAY_DATA = {
+  "list_of_questions": [
+    {
+      "question": "Tell me about yourself.",
+      "answer": "Hi, I'm Alex, and I have a deep passion for both music and engineering. I enjoy playing piano and exploring the emotional landscapes that music can create. I also love problem-solving, especially when it involves creative applications in fields like electrical engineering and artificial intelligence."
+    },
+    {
+      "question": "What are your academic goals after high school?",
+      "answer": "I aim to pursue a dual degree in music and electrical engineering. I'm particularly interested in studying how technology can enhance musical experiences and in designing specialized processors for neural networks to process and generate music. I want to attend a university where I can explore both my musical and technical interests in-depth."
+    },
+    {
+      "question": "What subjects are you currently struggling with, if any?",
+      "answer": "While I find calculus fascinating, there are times when it can be challenging, especially when it comes to applying it to physical concepts. However, I enjoy working through these challenges and using them to enhance my understanding of engineering principles."
+    },
+    {
+      "question": "Do you participate in any extracurricular activities?",
+      "answer": "Yes, I’m very involved in music. I volunteer to teach piano to younger students and help organize music performances in my community. Additionally, I’ve been part of virtual performances and have arranged ensemble pieces to bring people together during difficult times."
+    },
+]
+}
+
+SAMPLE_ESSAY_DATA['essay'] = """
+The rippling arpeggios and beautiful sonorities of Ravel’s Miroirs are captivating; playing them and being in that moment gives me a sense of greater existence. When a piece of music no longer takes effort but simply flows through oneself, it creates an indescribable feeling that, combined with the passion of the intense emotional landscapes so carefully crafted by a composer, are invigorating. For me, music and especially piano, makes me come alive. 
+
+Further than just playing music is my desire to instill that passion to someone else. The sudden elation I see when I help someone realize that not everything has to be difficult — to see that someone is able to not just hear a piece of music, but to truly listen and understand music — this is what inspires me to teach others, to learn.  I’ve volunteered to teach several students, and through showing students the theory behind pieces they enjoyed and teaching them the technical necessities to learn gradually more advanced pieces, I helped several students find a passion for music. When I received a letter from one student’s mother telling me what a significant impact I had made on his desire to pursue music, I was inspired to do more for my community and seek out more ways to teach others and learn from others. 
+
+I believe that through music we can improve one another and the world. To bring some joy and sense of community to local retirement homes during the pandemic, I arranged and edited several videos of Ashbury musicians including duets between myself and other students performed virtually. In addition to this, I helped several friends through accompaniment and other assistance in the form of performances both at school and at local competitions. Even through this pandemic, I’ve continued to arrange ensemble performances of pieces. Music has the ability to soothe, enliven, and bring people together. While our communities may seem isolated due to the pandemic, by organizing virtual music performances and ensembles I’ve sought to bring a bit of joy and liveliness back to our world. 
+
+At BU, I will bring with me these experiences and my desire to help others find what makes them come alive. Whether this is playing music, understanding music, or just listening to a wonderful piece, I hope my future contributions at BU will help someone else feel this. The beauty and passion I feel is not limited solely to music. I experience that same rush, that same energy when, for example, using integration to derive the volume of a cone and extending this to any similarly defined solid. It’s the application of abstract concepts and creative problem solving that I feel is so important to both music and engineering, and BU is the perfect combination of a conservatory-style music education and a rigorous exploration of electrical engineering. 
+
+While I have many passions, one thing I ultimately hope to accomplish at BU, whether as an undergraduate or a postdoctoral student, is to design more effective specialized processors for the usage of existing neural network infrastructures to process and create generative models for various forms of music. The research opportunities, emphasis on both music and electrical engineering, and increased emphasis on data processing and deep learning at BU make a perfect combination for what I hope to achieve. Through my studies in BU’s dual degree program, I can integrate my passions together and pursue everything that makes me come alive. 
+"""
+
 def test_convert_question():
-    print(convert_questions_to_preprompt(SAMPLE_DATA))
+    print(convert_questions_to_preprompt(SAMPLE_QUESTION_DATA))
 
-def test_generate_essay_outline():
-    url = 'http://127.0.0.1:5000/generate_essay_outline'
-    data = SAMPLE_DATA
-
-    response = requests.post(url, json=data, stream=True)
+def test_api(path: str, data: dict):
+    response = requests.post('http://127.0.0.1:5000/' + path, json=data, stream=True, timeout=600)
 
     if response.status_code == 200:
         print("Streaming response:")
@@ -55,6 +85,11 @@ def test_generate_essay_outline():
     else:
         print(f"Request failed with status code: {response.status_code}")
 
+def test_generate_essay_outline():
+    test_api('generate_essay_outline', SAMPLE_QUESTION_DATA)
+
+def test_essay_feedback():
+    test_api('essay_feedback', SAMPLE_QUESTION_DATA)
 
 if __name__ == '__main__':
     test_generate_essay_outline()

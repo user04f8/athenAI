@@ -53,11 +53,7 @@ You are a professional college essay coach and advisor. You have just completed 
 
 Your task is to help the student craft a compelling and unique essay outline for their college application essay. Use the information gathered during the conversation to highlight the student's unique qualities, experiences, and aspirations.
 
-Provide a detailed essay outline that structures the essay effectively, ensuring it showcases the student's strengths and addresses any concerns. The outline should include:
-
-- **Introduction:** Set the stage for the essay, grabbing the reader's attention.
-- **Body Paragraphs:** Each should focus on a main point or experience, providing supporting details and reflections.
-- **Conclusion:** Tie together the main themes and reflect on how these experiences have prepared the student for college and future goals.
+Provide a detailed essay outline that structures the essay effectively, ensuring it showcases the student's strengths and addresses any concerns.
 
 Focus on helping the student stand out by emphasizing their individuality and passion.
         """.strip()
@@ -65,7 +61,8 @@ Focus on helping the student stand out by emphasizing their individuality and pa
         *convert_questions_to_preprompt(list_of_questions),
         {
             "role": "user",
-            "content": "Based on our conversation, please help me create an essay outline for my college application essay."
+            "content": "Based on our conversation, please help me create an essay outline for my college application essay answering the below quesiton: \n\n"
+                       "\"Some students have a background, identity, interest, or talent that is so meaningful they believe their application would be incomplete without it. If this sounds like you, then please share your story.\""
         }
     ]
 
@@ -78,10 +75,55 @@ Focus on helping the student stand out by emphasizing their individuality and pa
 
     def generate():
         for chunk in response:
-            if 'choices' in chunk:
-                yield chunk['choices'][0]['delta'].get('content', '')
+            if chunk.choices[0].delta.content:
+                yield chunk.choices[0].delta.content
 
     return Response(generate(), mimetype='text/event-stream')
+
+@app.route('/essay_feedback', methods=['POST'])
+def essay_feedback():
+    data = request.get_json()
+    list_of_questions = data['list_of_questions']
+    essay = data['essay']
+
+    messages = [
+        {
+            "role": "system",
+            "content": """
+You are a professional college essay coach and advisor. You have just completed an in-depth conversation with a student to understand their background, experiences, goals, and challenges for their college application. 
+
+Your task is to help the student craft a compelling and unique essay outline for their college application essay. Use the information gathered during the conversation to highlight the student's unique qualities, experiences, and aspirations.
+
+Focus on helping the student stand out by emphasizing their individuality and passion.
+
+You should provide the feedback by repeating the essay verbatim and interspersing feedback inside of angle brackets < like this > and ending with a summary of feedback.
+
+        """.strip()
+        },
+        *convert_questions_to_preprompt(list_of_questions),
+        {
+            "role": "user",
+            "content": "Based on our conversation, please help me refine my essay outline for my college application essay answering the below quesiton: \n\n"
+                       "\"Some students have a background, identity, interest, or talent that is so meaningful they believe their application would be incomplete without it. If this sounds like you, then please share your story.\""
+                       + "\n\n" +
+                       essay
+        }
+    ]
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        max_tokens=1000,
+        stream=True,
+    )
+
+    def generate():
+        for chunk in response:
+            if chunk.choices[0].delta.content:
+                yield chunk.choices[0].delta.content
+
+    return Response(generate(), mimetype='text/event-stream')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
