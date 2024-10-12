@@ -21,6 +21,7 @@ def generate_question():
     Expects JSON with TODO: define input type
     """
     data = request.get_json()
+    list_of_questions = data['list_of_questions']
 
     response: str = client.chat.completions.create(
         model="gpt-4o",
@@ -29,7 +30,7 @@ def generate_question():
                 "role": "system",
                 "content": QuestionPrompts.SYSTEM_PROMPT
             },
-            *convert_questions_to_preprompt(data['list_of_questions'])
+            *convert_questions_to_preprompt(list_of_questions)
         ],
         max_tokens=100,
     ).choices[0].message.content
@@ -42,6 +43,7 @@ def generate_question():
 @app.route('/generate_essay_outline', methods=['POST'])
 def generate_essay_outline():
     data = request.get_json()
+    list_of_questions = data['list_of_questions']
 
     messages = [
         {
@@ -60,7 +62,7 @@ Provide a detailed essay outline that structures the essay effectively, ensuring
 Focus on helping the student stand out by emphasizing their individuality and passion.
         """.strip()
         },
-        *convert_questions_to_preprompt(data['list_of_questions']),
+        *convert_questions_to_preprompt(list_of_questions),
         {
             "role": "user",
             "content": "Based on our conversation, please help me create an essay outline for my college application essay."
