@@ -5,35 +5,35 @@ SAMPLE_QUESTION_DATA = {
     "list_of_questions": [
   {
     "question": "Tell me about yourself.",
-    "answer": "Hi, I'm Alex, a high school junior. I'm passionate about computer science and enjoy coding in Python. I’m also involved in my school's robotics team."
+    "response": "Hi, I'm Alex, a high school junior. I'm passionate about computer science and enjoy coding in Python. I’m also involved in my school's robotics team."
   },
   {
     "question": "What are your academic goals after high school?",
-    "answer": "I want to major in computer science, focusing on AI and machine learning. I'm aiming to get into a top-tier university and eventually work at a tech company like Google or start my own tech business."
+    "response": "I want to major in computer science, focusing on AI and machine learning. I'm aiming to get into a top-tier university and eventually work at a tech company like Google or start my own tech business."
   },
   {
     "question": "What subjects are you currently struggling with, if any?",
-    "answer": "Math is a bit challenging for me, especially calculus, but I’m working on improving with the help of online resources and a tutor."
+    "response": "Math is a bit challenging for me, especially calculus, but I’m working on improving with the help of online resources and a tutor."
   },
   {
     "question": "Do you participate in any extracurricular activities?",
-    "answer": "Yes, I'm part of the robotics team, and I also play soccer. I like how robotics allows me to apply what I learn in class, and soccer helps me stay active and work as part of a team."
+    "response": "Yes, I'm part of the robotics team, and I also play soccer. I like how robotics allows me to apply what I learn in class, and soccer helps me stay active and work as part of a team."
   },
   {
     "question": "Have you thought about any specific colleges you'd like to apply to?",
-    "answer": "Yes, I’m looking at schools like MIT, Stanford, and Carnegie Mellon because of their strong computer science programs and innovation-driven culture."
+    "response": "Yes, I’m looking at schools like MIT, Stanford, and Carnegie Mellon because of their strong computer science programs and innovation-driven culture."
   },
   {
     "question": "Do you have a plan to make your application stand out?",
-    "answer": "I’m planning to showcase my leadership skills from robotics, as well as a machine learning project I’ve been working on. I’m also trying to develop a strong personal statement that highlights my passion for solving real-world problems through technology."
+    "response": "I’m planning to showcase my leadership skills from robotics, as well as a machine learning project I’ve been working on. I’m also trying to develop a strong personal statement that highlights my passion for solving real-world problems through technology."
   },
   {
     "question": "What direction do you want to go with your college essay?",
-    "answer": "I want to write about my experience leading the robotics team and how it taught me problem-solving and leadership skills, but I'm also thinking about discussing how I’ve used coding to help local businesses automate their processes."
+    "response": "I want to write about my experience leading the robotics team and how it taught me problem-solving and leadership skills, but I'm also thinking about discussing how I’ve used coding to help local businesses automate their processes."
   },
   {
     "question": "What are you struggling with in your essay right now?",
-    "answer": "I'm struggling with making my essay sound unique. I feel like a lot of people have similar experiences with leadership and tech, so I’m not sure how to make mine stand out."
+    "response": "I'm struggling with making my essay sound unique. I feel like a lot of people have similar experiences with leadership and tech, so I’m not sure how to make mine stand out."
   }
 ]
 }
@@ -42,19 +42,19 @@ SAMPLE_ESSAY_DATA = {
   "list_of_questions": [
     {
       "question": "Tell me about yourself.",
-      "answer": "Hi, I'm Alex, and I have a deep passion for both music and engineering. I enjoy playing piano and exploring the emotional landscapes that music can create. I also love problem-solving, especially when it involves creative applications in fields like electrical engineering and artificial intelligence."
+      "response": "Hi, I'm Alex, and I have a deep passion for both music and engineering. I enjoy playing piano and exploring the emotional landscapes that music can create. I also love problem-solving, especially when it involves creative applications in fields like electrical engineering and artificial intelligence."
     },
     {
       "question": "What are your academic goals after high school?",
-      "answer": "I aim to pursue a dual degree in music and electrical engineering. I'm particularly interested in studying how technology can enhance musical experiences and in designing specialized processors for neural networks to process and generate music. I want to attend a university where I can explore both my musical and technical interests in-depth."
+      "response": "I aim to pursue a dual degree in music and electrical engineering. I'm particularly interested in studying how technology can enhance musical experiences and in designing specialized processors for neural networks to process and generate music. I want to attend a university where I can explore both my musical and technical interests in-depth."
     },
     {
       "question": "What subjects are you currently struggling with, if any?",
-      "answer": "While I find calculus fascinating, there are times when it can be challenging, especially when it comes to applying it to physical concepts. However, I enjoy working through these challenges and using them to enhance my understanding of engineering principles."
+      "response": "While I find calculus fascinating, there are times when it can be challenging, especially when it comes to applying it to physical concepts. However, I enjoy working through these challenges and using them to enhance my understanding of engineering principles."
     },
     {
       "question": "Do you participate in any extracurricular activities?",
-      "answer": "Yes, I’m very involved in music. I volunteer to teach piano to younger students and help organize music performances in my community. Additionally, I’ve been part of virtual performances and have arranged ensemble pieces to bring people together during difficult times."
+      "response": "Yes, I’m very involved in music. I volunteer to teach piano to younger students and help organize music performances in my community. Additionally, I’ve been part of virtual performances and have arranged ensemble pieces to bring people together during difficult times."
     },
 ]
 }

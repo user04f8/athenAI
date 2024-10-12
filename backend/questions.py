@@ -9,7 +9,7 @@ def convert_questions_to_preprompt(question_response: list[question_with_respons
     messages = []
     for i, qa in enumerate(question_response):
         question = qa["question"]
-        answer = qa["answer"]
+        response = qa["response"]
         messages.append({"role": "assistant", "content": question})
-        messages.append({"role": "user", "content": answer + f"({MAX_NUM_QUESTIONS - i} question)"})
+        messages.append({"role": "user", "content": response + f"({MAX_NUM_QUESTIONS - i} question)"})
     return messages

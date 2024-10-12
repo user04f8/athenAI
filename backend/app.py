@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import openai
 import os
 from flask import Flask, Response, request, jsonify
+from flask_cors import CORS
+import sys
 
 from prompts import QuestionPrompts
 from questions import convert_questions_to_preprompt
@@ -13,15 +15,18 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 client = openai.OpenAI()
 
 app = Flask(__name__)
+CORS(app)
+# NOTE: for security eventually should do resources={r"/generate_question": {"origins": "http://localhost:3000"}} etc.
 
 @app.route('/generate_question', methods=['POST'])
 def generate_question():
     """
     Endpoint to handle POST requests for generating the next response.
-    Expects JSON with TODO: define input type
     """
     data = request.get_json()
     list_of_questions = data['list_of_questions']
+
+    print(list_of_questions, file=sys.stdout, flush=True)
 
     response: str = client.chat.completions.create(
         model="gpt-4o",
