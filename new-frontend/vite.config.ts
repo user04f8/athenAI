@@ -11,6 +11,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      '/essay_feedback': {
+        target: 'http://localhost:5000',  // Flask server URL
+        changeOrigin: true,
+        secure: false,
+      },
       // TODO other API endpoints
     }
   }

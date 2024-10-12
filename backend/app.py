@@ -88,24 +88,24 @@ Focus on helping the student stand out by emphasizing their individuality and pa
 @app.route('/essay_feedback', methods=['POST'])
 def essay_feedback():
     data = request.get_json()
-    list_of_questions = data['list_of_questions']
+    list_of_questions = data.get('list_of_questions')
     essay = data['essay']
     essay_prompt = data['essay_prompt']
 
     messages = [
         {
             "role": "system",
-            "content": """
+            "content": f"""
 You are AthenaPrep, a professional college essay coach and advisor. You have just completed an in-depth conversation with a student to understand their background, experiences, goals, and challenges for their college application. 
 
 Your task is to help the student craft a compelling and unique essay for their college application essay. Use the information gathered during the conversation to highlight the student's unique qualities, experiences, and aspirations. Focus on helping the student stand out by emphasizing their individuality and passion.
 
 - You will receive an essay written by the student, along with the associated prompt, and your role is to provide detailed feedback by adding comments without changing the original text.
-- Additionally, you will receive a transcript of a conversation the student had with a college admissions officer, which you should use to inform your feedback.
+{'- Additionally, you will receive a transcript of a conversation the student had with a college admissions officer, which you should use to inform your feedback.' if list_of_questions else '' }
 - Provide all feedback within angle brackets: < example feedback here >.
 - Do not rewrite or rephrase any part of the essay. Any suggestions for changes must be provided as comments next to the relevant sections.
 - Focus your feedback on both grammatical accuracy and content relevance. Identify issues with sentence clarity, coherence, and structure, but prioritize ensuring that the essay aligns with the prompt and the student's goals.
-- After inserting your comments, provide a final overall commentary at the end of the essay, enclosed in braces: {Insert final commentary here}.
+- After inserting your comments, provide a final overall commentary at the end of the essay, enclosed in braces: {{Insert final commentary here}}.
 - The final commentary should summarize the key areas for improvement, overall themes, and strengths or weaknesses of the essay.
 - Here's an example of the expected formatting:
 
@@ -113,16 +113,14 @@ Your task is to help the student craft a compelling and unique essay for their c
   "Pretend this is a short essay."
 
   Formatted with feedback:  
-  "Pretend this <comment1> is a short <comment2> essay. {commentary}"
+  "Pretend this <comment1> is a short <comment2> essay. {{commentary}}"
 
 - The primary focus should be on helping the student create a compelling, thematic, and relevant narrative that would appeal to a college admissions officer.
-- Maintain a constructive and encouraging tone throughout the feedback, guiding the student toward improving their essay without directly making changes.
+- Maintain a constructive and encouraging tone throughout the feedback, guiding the student toward improving their essay.
 
-Here is a transcript of the initial conversation between the advisor and the student:
-
-        """.strip()
+        """.strip() + ("Here is a transcript of the initial conversation between the advisor and the student:" if list_of_questions else "")
         },
-        *convert_questions_to_preprompt(list_of_questions),
+        *(convert_questions_to_preprompt(list_of_questions) if list_of_questions else ()),
         {
             "role": "user",
             "content": "Based on our conversation, please help me refine my essay outline for my college application essay answering the below question: \n\n"
