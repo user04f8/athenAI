@@ -14,7 +14,7 @@ type QuestionWithResponse = {
 const baseQuestions: string[] = [
   "Tell me about yourself.",
   "What are your goals after highschool (Acedemic, or otherwise)?",
-  "What subjects are you struggling with, if any?",
+  "Do you participate in any extracurricular activities? Tell me about them.",
   "Have you thought about any specific colleges youd like to apply to?"
 ]
 
