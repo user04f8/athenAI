@@ -5,7 +5,7 @@ import openai
 # from openai.types import 
 import os
 
-from prompts import *
+from prompts import QuestionPrompts
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -48,7 +48,7 @@ def generate_question():
     
     prompt = data.get('prompt', '')
 
-    question = generate_question_from()
+    question = gene()
 
     # Stream the output as text/event-stream
     return Response(client.chat.completions.create(

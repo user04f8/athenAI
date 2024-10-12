@@ -36,3 +36,6 @@ def generate_question():
     ), mimetype='text/event-stream')
 
 # TODO define API
+
+if __name__ == '__main__':
+    app.run()
