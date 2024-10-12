@@ -2,9 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
+import { ChevronRight, Bot } from 'lucide-react'
 import Navbar from './Navbar'
-import { Link } from 'react-router-dom'
 
 // Define the type for questions with response
 type QuestionWithResponse = {
@@ -14,9 +13,10 @@ type QuestionWithResponse = {
 
 const baseQuestions: string[] = [
   "Tell me about yourself.",
-  "What are your goals after highschool (Acedemic, or otherwise)?",
+  "What are your aspirations after highschool?",
   "Do you participate in any extracurricular activities? Tell me about them.",
-  "Have you thought about any specific colleges youd like to apply to?"
+  "What do you indend to major in?"
+  // "Have you thought about any specific colleges you'd like to apply to?"
 ]
 
 export default function Orientation() {
@@ -74,8 +74,7 @@ export default function Orientation() {
         question: questions[index],
         response: answer
       }))
-// http://127.0.0.1:5000 is temporary and should be removed once better hosting is figured out
-      const response = await fetch('http://127.0.0.1:5000/generate_question', {
+      const response = await fetch('/generate_question', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
