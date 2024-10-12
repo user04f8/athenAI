@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, User, ChevronRight, Bot } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { ChevronRight, Bot } from 'lucide-react'
+import Navbar from './Navbar'
 import { Progress } from './ui/progress'
 
 
@@ -16,10 +16,11 @@ type QuestionWithResponse = {
 }
 
 const baseQuestions: string[] = [
-  "What's your name?",
-  "What's your intended major?",
-  "What's your biggest academic achievement?",
-  "What's a challenge you've overcome?"
+  "Tell me about yourself.",
+  "What are your aspirations after highschool?",
+  "Do you participate in any extracurricular activities? Tell me about them.",
+  "What do you indend to major in?"
+  // "Have you thought about any specific colleges you'd like to apply to?"
 ]
 
 export default function Orientation() {
@@ -82,8 +83,7 @@ export default function Orientation() {
         question: questions[index],
         response: answer
       }))
-// http://127.0.0.1:5000 is temporary and should be removed once better hosting is figured out
-      const response = await fetch('http://127.0.0.1:5000/generate_question', {
+      const response = await fetch('/generate_question', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -114,35 +114,7 @@ export default function Orientation() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 flex flex-col font-sans">
-      <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <BookOpen className="h-8 w-8 text-purple-500" />
-                <span className="ml-2 text-xl font-bold text-purple-600">AthenaPrep</span>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <a href="#" className="border-b-2 border-purple-500 text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  Orientation
-                </a>
-                <Link to="/essay-editor" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  Essay Editor
-                </Link>
-                <a href="#" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  About
-                </a>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <button className="bg-purple-100 p-1 rounded-full text-purple-500 hover:text-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-300 ease-in-out transform hover:scale-110">
-                <span className="sr-only">View profile</span>
-                <User className="h-6 w-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">
         <motion.div

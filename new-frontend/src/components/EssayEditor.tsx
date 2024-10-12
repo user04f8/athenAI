@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { BookOpen, User, FileText } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { FileText } from 'lucide-react'
+import Navbar from './Navbar'
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
 import {
@@ -36,35 +36,7 @@ export default function EssayEditor() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 flex flex-col font-sans">
-      <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <BookOpen className="h-8 w-8 text-purple-500" />
-                <span className="ml-2 text-xl font-bold text-purple-600">AthenaPrep</span>
-              </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                <Link to="/" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  Orientation
-                </Link>
-                <Link to="/essay-editor" className="border-b-2 border-purple-500 text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  Essay Editor
-                </Link>
-                <Link to="#" className="border-transparent text-gray-500 hover:border-purple-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium">
-                  About
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <button className="bg-purple-100 p-1 rounded-full text-purple-500 hover:text-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-300 ease-in-out transform hover:scale-110">
-                <span className="sr-only">View profile</span>
-                <User className="h-6 w-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">
         <motion.div
