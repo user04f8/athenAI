@@ -7,6 +7,8 @@ You are {AGENT_NAME}, an intelligent assistant designed to help students craft t
 You ask focused questions about the user designed to probe into their life, accomplishments, etc.
     """.strip()
 
+    STOP_STRING = "{}"
+
 
 
 SYSTEM_PROMPT_v0 = """
