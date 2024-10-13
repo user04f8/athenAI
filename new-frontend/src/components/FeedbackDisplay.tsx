@@ -15,7 +15,7 @@ export default function FeedbackDisplay({ feedback }: FeedbackDisplayProps) {
         <CardTitle className="text-2xl font-bold">Feedback</CardTitle>
       </CardHeader>
       <CardContent className="p-4">
-        <ScrollArea className="max-h-[80vh] overflow-y-auto pr-4">
+        <ScrollArea className="max-h-[639px] overflow-y-auto pr-4">
           {feedback.map((item, index) => (
             <div
               key={item.id}
