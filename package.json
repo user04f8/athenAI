@@ -4,6 +4,6 @@
     "@vitejs/plugin-react": "^4.3.2"
   },
   "scripts": {
-    "postinstall": "npm install --prefix new-frontend"
+    "heroku-postbuild": "npm install --prefix new-frontend"
   }
 }
