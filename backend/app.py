@@ -14,23 +14,19 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 client = openai.OpenAI()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../new-frontend/dist', static_url_path='')
 CORS(app)
 # NOTE: for security eventually should do resources={r"/generate_question": {"origins": "http://localhost:3000"}} etc.
-
-STATIC_DIR = 'new-frontend/dist'
 
 # Static hosting NOTE this is temporary I hope
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react_app(path):
-    print(os.path.join(STATIC_DIR, path))
-
-    if path != "" and os.path.exists(os.path.join(STATIC_DIR, path)):
-        return send_from_directory(STATIC_DIR, path)
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
     else:
         print('ajskdfljksdjlksadjksakljsadfljfdsaklkjfdljskdfljk')
-        return send_from_directory(STATIC_DIR, 'index.html')
+        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/generate_question', methods=['POST'])
 def generate_question():
