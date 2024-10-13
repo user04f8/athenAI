@@ -1,1 +1,1 @@
-web: concurrently "npm --prefix new-frontend run frontend" "python backend/app.py"
+web: npm --prefix new-frontend run dev
