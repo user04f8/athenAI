@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "frontend": "vite",
+    "frontend": "NODE_ENV=production vite --port $PORT --host",
     "backend": "python ../backend/app.py",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
