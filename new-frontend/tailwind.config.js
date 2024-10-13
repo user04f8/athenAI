@@ -8,9 +8,11 @@ export default {
     'bg-purple-500',
     'bg-purple-300',
     'bg-purple-50',
+    'bg-purple-100',
     'bg-blue-500',
     'bg-blue-300',
     'bg-blue-50',
+    'bg-blue-100'
   ],
   theme: {
     extend: {},
