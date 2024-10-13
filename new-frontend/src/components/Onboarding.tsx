@@ -123,7 +123,7 @@ export default function Orientation() {
           transition={{ duration: 0.5 }}
           className="w-full max-w-2xl bg-white rounded-lg shadow-2xl p-8"
         >
-          <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">College Essay Writing Orientation</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">College Essay Quickstart</h2>
           <p className="text-gray-600 mb-8">
             Welcome to our college essay writing orientation! This process will help us understand your background and goals.
           </p>

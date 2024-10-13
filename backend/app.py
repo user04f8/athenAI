@@ -105,7 +105,6 @@ You are an AI assistant designed to provide detailed feedback on essays. When gi
 Your feedback should focus on content, structure, clarity, style, grammar, and how effectively the text addresses the prompt. Be specific in your suggestions for improvement.
 
 
-
 As an example, for the following input essay:
 
 "I have always been fascinated by the stars. Ever since I was a child, I would spend nights gazing up at the sky, wondering what lies beyond our planet. This curiosity led me to join the astronomy club in high school, where I learned to operate telescopes and analyze celestial events. My passion for astronomy is not just a hobby; it's a significant part of who I am."
@@ -118,9 +117,69 @@ You should return:
 
 < This curiosity led me to join the astronomy club in high school, where I learned to operate telescopes and analyze celestial events. | This shows active pursuit of your interest. You might include a particular event or discovery that was significant to you to illustrate your experiences. >
 
-< My passion for astronomy is not just a hobby; it's a significant part of who I am. | A strong concluding statement that ties back to the prompt. Elaborating on how this passion influences your future goals or worldview could strengthen your essay further. >
+< My passion for astronomy is not just a hobby; it's a significant part of who I am. | Elaborating on how this passion influences your future goals or worldview could strengthen your essay further. >
 
         """.strip() + ("Here is a transcript of the initial conversation between the advisor and the student:" if list_of_questions else "")
+        },
+        *(convert_questions_to_preprompt(list_of_questions) if list_of_questions else ()),
+        {
+            "role": "user",
+            "content": "Based on our conversation, please help me refine my essay outline for my college application essay answering the below question: \n\n"
+                       f'"{essay_prompt}"\n\n{essay}'
+        }
+    ]
+
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages,
+        max_tokens=1000,
+        stream=True,
+    )
+
+    def generate():
+        for chunk in response:
+            if chunk.choices[0].delta.content:
+                yield chunk.choices[0].delta.content
+
+    return Response(generate(), mimetype='text/event-stream')
+
+@app.route('/essay_overall_feedback', methods=['POST'])
+def essay_overall_feedback():
+    data = request.get_json()
+    list_of_questions = data.get('list_of_questions')
+    essay = data['essay']
+    essay_prompt = data['essay_prompt']
+
+    messages = [
+        {
+            "role": "system",
+            "content": f"""
+You are **AthenaPrep**, an expert college admissions advisor specializing in evaluating and improving college application essays. Your goal is to help students craft memorable and effective essays that appeal to admissions officers.
+
+**Instructions:**
+  
+- **Feedback Content:** 
+  - Analyze the general themes and overarching concepts of the essay.
+  - Evaluate the essay's coherence, clarity, and ability to convey the intended message.
+  - Assess how effectively the essay appeals to admissions officers.
+  - Offer specific suggestions to enhance the essay's impact and memorability.
+
+- **Tone and Style:** 
+  - Be concise and focus on the most significant areas for improvement.
+  - Use clear and supportive language to encourage the student.
+  - Avoid rewriting the essay; instead, guide the student on how to improve it themselves.
+
+Start by outlining a thought process of how the essay could be improved; then, provide a very concise set of suggestions for enhancements and overall assessment in curly braces. The final feedback should exist as at most a couple sentences followed by 3-4 bullet points outlining key suggestions for enhancements; there should be no formatting or other text apart from the suggestions within the curly braces.
+
+As an example, the final output should look someting like this:
+
+{{This is some overall feedback, at most a paragraph.}}
+
+ - Bullet point 1
+ - Bullet point 2
+ - Bullet point 3
+
+""".strip() + ("Here is a transcript of the initial conversation between the advisor and the student:" if list_of_questions else "")
         },
         *(convert_questions_to_preprompt(list_of_questions) if list_of_questions else ()),
         {
