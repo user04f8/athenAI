@@ -1,5 +1,5 @@
 # AthenaPrep
-
+![Landing page of AthenaPrep](./landing.png)
 ## Overview
 AthenaPrep is an AI-driven platform designed to help students with college admissions by providing affordable, personalized guidance on essays and applications. Created by a group of students at HackHarvard 2024, AthenaPrep aims to level the playing field by offering high-quality college prep resources that are accessible to everyone.
 
