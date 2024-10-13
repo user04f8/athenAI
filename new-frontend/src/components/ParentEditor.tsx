@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EssayEditor from './EssayEditor';
 import FeedbackDisplay from './FeedbackDisplay';
@@ -7,10 +7,17 @@ import { FeedbackItem } from './types';
 const ParentComponent = () => {
   const [feedbackList, setFeedbackList] = useState<FeedbackItem[]>([]);
   const hasFeedback = feedbackList.length > 0;
+  const [feedbackOccurred, setFeedbackOccurred] = useState<boolean>(false);
 
   // State variables for hovered and selected feedback items
   const [hoveredFeedbackId, setHoveredFeedbackId] = useState<number | null>(null);
   const [selectedFeedbackId, setSelectedFeedbackId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (hasFeedback) {
+      setFeedbackOccurred(true)
+    }
+  } , [hasFeedback])
 
   return (
     <div
@@ -38,7 +45,7 @@ const ParentComponent = () => {
 
       {/* FeedbackDisplay */}
       <AnimatePresence>
-        {hasFeedback && (
+        {(hasFeedback || feedbackOccurred) && (
           <motion.div
             key="feedback"
             className="flex flex-col justify-center"
