@@ -14,7 +14,7 @@ import {
 } from "./ui/select"
 import { FeedbackItem } from './types'
 
-const testOutput = {"When I think about my future in computer science, I envision myself working at the intersection of technology and society. I want to not only develop innovative AI systems but also apply them to solve real-world challenges in urban environments. New York University, with its unique combination of academic rigor, urban location, and interdisciplinary focus, stands out to me as the ideal place to pursue these ambitions. ": "Consider mentioning how NYU's specific programs or courses align with your vision. This could help strengthen the connection between your goals and what NYU specifically offers", "One of the key reasons I’m drawn to NYU is its renowned Courant Institute of Mathematical Sciences, which has an outstanding reputation in computer science, especially in the areas of artificial intelligence and machine learning": "It would benefit your argument to mention any specific professors or projects at the Courant Institute that align with your interests.", "These fields are my passion, and I’m eager to learn from faculty members who are at the forefront of AI research. Access to this level of expertise, combined with NYU’s interdisciplinary programs, will give me the tools to explore the deeper societal implications of technology, something I find increasingly important.": "Good connection here; you may want to provide a specific example of how NYU’s programs integrate societal impacts with technology"}
+// const testOutput = {"When I think about my future in computer science, I envision myself working at the intersection of technology and society. I want to not only develop innovative AI systems but also apply them to solve real-world challenges in urban environments. New York University, with its unique combination of academic rigor, urban location, and interdisciplinary focus, stands out to me as the ideal place to pursue these ambitions. ": "Consider mentioning how NYU's specific programs or courses align with your vision. This could help strengthen the connection between your goals and what NYU specifically offers", "One of the key reasons I’m drawn to NYU is its renowned Courant Institute of Mathematical Sciences, which has an outstanding reputation in computer science, especially in the areas of artificial intelligence and machine learning": "It would benefit your argument to mention any specific professors or projects at the Courant Institute that align with your interests.", "These fields are my passion, and I’m eager to learn from faculty members who are at the forefront of AI research. Access to this level of expertise, combined with NYU’s interdisciplinary programs, will give me the tools to explore the deeper societal implications of technology, something I find increasingly important.": "Good connection here; you may want to provide a specific example of how NYU’s programs integrate societal impacts with technology"}
 
 // these are taken directly from common app
 const prompts = [
@@ -37,39 +37,74 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
   const [isEditing, setIsEditing] = useState(true)
   const [feedback, setFeedback] = useState({});
 
-  const handleGenerateFeedback = () => {
-    // api call here
-    console.log('Generating feedback for:', { selectedPrompt, essay })
-    console.log(Object.values(testOutput))
-    setFeedback(testOutput)
-    setIsEditing(false)
+const handleGenerateFeedback = async () => {
+  console.log('Generating feedback for:', { selectedPrompt, essay });
 
-  }
-
-  const handleEditEssay = () => {
-    setIsEditing(true)
-  }
-
-  const renderEssayWithHighlights = () => {
-    if (!feedback) return essay;
-
-    // TODO pick good color
-    // Highlight feedback keys in the essay 
-    let highlightedEssay = essay;
-    Object.keys(feedback).forEach((key) => {
-      const highlightedText = `<mark class="bg-purple-300">${key}</mark>`;
-      highlightedEssay = highlightedEssay.replace(key, highlightedText);
+  try {
+    const response = await fetch('http://127.0.0.1:5000/essay_feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ essay, essay_prompt: selectedPrompt }),
     });
-    return highlightedEssay;
-    const generatedFeedback = Object.values(testOutput).map((text, index) => ({
-      id: index,
-      text,
-  }))
 
-  // Update the feedback list in the parent component
-  setFeedbackList(generatedFeedback);
-}
+    if (!response.ok) {
+      console.error('Response not ok:', response.statusText);
+      return;
+    }
 
+    // Check if response.body is null or undefined
+  if (!response.body) {
+    console.error('Response body is null, cannot read the stream.');
+    return;
+  }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+    let buffer = '';
+    let done = false;
+    
+    // Reset the feedback list before new advice requested
+    setFeedbackList([]);
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      if (value) {
+        const chunk = decoder.decode(value);
+        buffer += chunk;
+        // Process complete groups in the buffer
+        let groupStart = buffer.indexOf('<');
+        let groupEnd = buffer.indexOf('>');
+
+        while (groupStart !== -1 && groupEnd !== -1 && groupEnd > groupStart) {
+          const group = buffer.substring(groupStart + 1, groupEnd);
+          buffer = buffer.substring(groupEnd + 1);
+
+          // Parse the group
+          const parts = group.split('|');
+          if (parts.length >= 2) {
+            const valuePart = parts.slice(1).join('|').trim();
+
+            // Update feedback list
+            setFeedbackList((prevList) => [
+              ...prevList,
+              { id: prevList.length, text: valuePart },
+            ]);
+          }
+
+          groupStart = buffer.indexOf('<');
+          groupEnd = buffer.indexOf('>');
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+  
 
 
   return (
