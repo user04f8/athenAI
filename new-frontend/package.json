@@ -6,7 +6,7 @@
   "scripts": {
     "prod": "concurrently \"vite --port $PORT --host\" \"npm run backend\"",
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "frontend": "vite --port $PORT --host",
+    "frontend": "vite",
     "backend": "python ../backend/app.py",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
