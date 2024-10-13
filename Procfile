@@ -1,1 +1,1 @@
-web: serve -s new-frontend/dist
+web: concurrently "serve -s new-frontend/dist -l $PORT" "python backend/app.py"
