@@ -1,1 +1,1 @@
-web: cd ../new-frontend && npm install && npm run dev
+web: cd new-frontend && npm install && npm run dev
