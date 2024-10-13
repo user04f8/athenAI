@@ -50,12 +50,12 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
         },
         body: JSON.stringify({ essay, essay_prompt: selectedPrompt }),
       });
-
+      
       if (!response.ok) {
         console.error('Response not ok:', response.statusText);
         return;
       }
-
+      
       // Check if response.body is null or undefined
       if (!response.body) {
         console.error('Response body is null, cannot read the stream.');
@@ -66,6 +66,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
       const decoder = new TextDecoder('utf-8');
       let buffer = '';
       let done = false;
+      let hasFeedback = false;
 
       while (!done) {
         const { value, done: doneReading } = await reader.read();
@@ -89,6 +90,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
               const valuePart = parts.slice(1).join('|').trim();
 
               // Update feedback list
+              hasFeedback = true
               setFeedbackList((prevList) => [
                 ...prevList,
                 { id: prevList.length + 1, text: valuePart },
@@ -103,6 +105,14 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
           }
         }
       }
+      
+      // Fallback: If no valid feedback items were found, add the entire response as a single item
+      if (!hasFeedback) {
+        setFeedbackList([
+          { id: 1, text: buffer.trim() || 'Feedback unavailable.' },
+        ]);
+      }
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
