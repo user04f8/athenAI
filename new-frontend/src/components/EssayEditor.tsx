@@ -43,7 +43,9 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
     setHighlightKeys([]);
 
     try {
-      const response = await fetch('/essay_feedback', {
+      // NOTE: Comment in below line and comment out line below that for prod branch
+      // const response = await fetch('/essay_feedback', {
+      const response = await fetch('http://127.0.0.1:5000/essay_feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -151,8 +153,8 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-4xl bg-white rounded-lg shadow-2xl p-8"
-      >
+        className="w-full max-w-2/3 bg-white rounded-lg shadow-2xl p-8"
+        >
         <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">
           Essay Editor
         </h2>
@@ -201,7 +203,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
             ) : (
               <div
                 dangerouslySetInnerHTML={{ __html: renderEssayWithHighlights() }}
-                className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md min-h-[400px] overflow-y-auto"
+                className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md h-[650px] overflow-y-auto"
               />
             )}
           </div>
