@@ -193,7 +193,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
             ) : (
               <div
                 dangerouslySetInnerHTML={{ __html: renderEssayWithHighlights() }}
-                className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md min-h-[400px] overflow-y-auto"
+                className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md h-[650px] overflow-y-auto"
               />
             )}
           </div>
