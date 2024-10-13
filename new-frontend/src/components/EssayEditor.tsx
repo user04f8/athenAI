@@ -145,8 +145,9 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
 
       highlightedText = highlightedText.replace(
         regex,
-        `<mark class="${colorClass}">${key}</mark>`
+        `<mark class="${colorClass}">${key}</mark><sup>${index + 1}</sup>`
       );
+      
     });
     return highlightedText;
   }
