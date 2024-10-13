@@ -38,7 +38,7 @@ def generate_question():
             },
             *convert_questions_to_preprompt(list_of_questions)
         ],
-        max_tokens=100,
+        max_tokens=300,
     ).choices[0].message.content
     
     return jsonify({
@@ -131,7 +131,7 @@ You should return:
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=messages,
-        max_tokens=1000,
+        max_tokens=5000,
         stream=True,
     )
 
@@ -200,7 +200,7 @@ Example of Final Output:
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=messages,
-        max_tokens=1000,
+        max_tokens=2000,
         stream=True,
     )
 
