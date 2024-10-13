@@ -16,7 +16,7 @@ export default function TestEssayEditor() {
     
       const getAPIEndpoint = async (endpoint: string, setHook: React.Dispatch<React.SetStateAction<string>>) => {
         try {
-            const response = await fetch(`http://127.0.0.1:5000/${endpoint}`, {
+            const response = await fetch(`/${endpoint}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
