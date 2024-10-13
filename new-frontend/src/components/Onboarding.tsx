@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight, Bot } from 'lucide-react'
-import Navbar from './Navbar'
 import { Progress } from './ui/progress'
 
 

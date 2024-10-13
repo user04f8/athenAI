@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FileText } from 'lucide-react'
-import Navbar from './Navbar'
 import { Button } from "./ui/button"
 import { Textarea } from "./ui/textarea"
 import {
@@ -13,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select"
+import { FeedbackItem } from './types'
 
 const testOutput = {"When I think about my future in computer science, I envision myself working at the intersection of technology and society. I want to not only develop innovative AI systems but also apply them to solve real-world challenges in urban environments. New York University, with its unique combination of academic rigor, urban location, and interdisciplinary focus, stands out to me as the ideal place to pursue these ambitions. ": "Consider mentioning how NYU's specific programs or courses align with your vision. This could help strengthen the connection between your goals and what NYU specifically offers", "One of the key reasons I’m drawn to NYU is its renowned Courant Institute of Mathematical Sciences, which has an outstanding reputation in computer science, especially in the areas of artificial intelligence and machine learning": "It would benefit your argument to mention any specific professors or projects at the Courant Institute that align with your interests.", "These fields are my passion, and I’m eager to learn from faculty members who are at the forefront of AI research. Access to this level of expertise, combined with NYU’s interdisciplinary programs, will give me the tools to explore the deeper societal implications of technology, something I find increasingly important.": "Good connection here; you may want to provide a specific example of how NYU’s programs integrate societal impacts with technology"}
 
@@ -27,7 +27,11 @@ const prompts = [
   "Share an essay on any topic of your choice. It can be one you've already written, one that responds to a different prompt, or one of your own design."
 ]
 
-export default function EssayEditor() {
+interface EssayEditorProps {
+  setFeedbackList: React.Dispatch<React.SetStateAction<FeedbackItem[]>>;
+}
+
+export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
   const [selectedPrompt, setSelectedPrompt] = useState('')
   const [essay, setEssay] = useState('')
 
@@ -35,10 +39,19 @@ export default function EssayEditor() {
     // api call here
     console.log('Generating feedback for:', { selectedPrompt, essay })
     console.log(Object.values(testOutput))
-  }
+    const generatedFeedback = Object.values(testOutput).map((text, index) => ({
+      id: index,
+      text,
+  }))
+
+  // Update the feedback list in the parent component
+  setFeedbackList(generatedFeedback);
+}
+
+
 
   return (
-      <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">
+      <div className="flex-grow flex flex-col items-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,16 +1,12 @@
 // FeedbackDisplay.jsx
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollArea } from "./ui/scrollarea";
 import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
-
-interface FeedbackItem {
-  id: number;
-  text: string;
-}
+import { FeedbackItem } from './types'
 
 interface FeedbackDisplayProps {
-  feedback?: FeedbackItem[];
+  feedback: FeedbackItem[];
 }
 
 const exampleFeedback: FeedbackItem[] = [
@@ -21,9 +17,15 @@ const exampleFeedback: FeedbackItem[] = [
   { id: 5, text: "The language used in the fourth paragraph is particularly vivid and descriptive. Great job!" }
 ];
 
-export default function FeedbackDisplay({ feedback = exampleFeedback }: FeedbackDisplayProps) {
+export default function FeedbackDisplay({ feedback }: FeedbackDisplayProps) {
+//   useEffect(
+//     () => {console.log(feedback)}
+//   , [feedback]
+// )
+
+
 return (
-    <Card className="bg-white rounded-lg shadow-2xl border border-purple-200">
+    <Card className="bg-white rounded-lg shadow-2xl border border-purple-200 mr-7">
     <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-t-lg">
         <CardTitle className="text-2xl font-bold">Feedback</CardTitle>
     </CardHeader>
