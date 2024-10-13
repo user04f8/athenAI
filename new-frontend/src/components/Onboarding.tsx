@@ -113,9 +113,6 @@ export default function Orientation() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 flex flex-col font-sans">
-      <Navbar />
-
       <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -217,6 +214,5 @@ export default function Orientation() {
           )}
         </motion.div>
       </div>
-    </div>
   )
 }

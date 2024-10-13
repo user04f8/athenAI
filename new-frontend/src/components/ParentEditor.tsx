@@ -7,8 +7,6 @@ import FeedbackDisplay from './FeedbackDisplay';
 
 const ParentComponent = () => {
   return (
-    <div className="flex flex-col h-screen">
-      <Navbar />
       <div className="flex flex-col md:flex-row flex-grow">
         <div className="w-full md:w-2/3 p-4">
           <EssayEditor />
@@ -17,7 +15,6 @@ const ParentComponent = () => {
           <FeedbackDisplay />
         </div>
       </div>
-    </div>
   );
 };
 
