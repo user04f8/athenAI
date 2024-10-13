@@ -1,5 +1,3 @@
-// ParentComponent.jsx
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EssayEditor from './EssayEditor';
@@ -9,6 +7,10 @@ import { FeedbackItem } from './types';
 const ParentComponent = () => {
   const [feedbackList, setFeedbackList] = useState<FeedbackItem[]>([]);
   const hasFeedback = feedbackList.length > 0;
+
+  // State variables for hovered and selected feedback items
+  const [hoveredFeedbackId, setHoveredFeedbackId] = useState<number | null>(null);
+  const [selectedFeedbackId, setSelectedFeedbackId] = useState<number | null>(null);
 
   return (
     <div
@@ -24,7 +26,14 @@ const ParentComponent = () => {
         transition={{ duration: 0.5, ease: 'easeInOut' }}
         style={{ flexGrow: 0, flexShrink: 0 }}
       >
-        <EssayEditor setFeedbackList={setFeedbackList} />
+        <EssayEditor
+          setFeedbackList={setFeedbackList}
+          feedbackList={feedbackList}
+          hoveredFeedbackId={hoveredFeedbackId}
+          selectedFeedbackId={selectedFeedbackId}
+          setHoveredFeedbackId={setHoveredFeedbackId}
+          setSelectedFeedbackId={setSelectedFeedbackId}
+        />
       </motion.div>
 
       {/* FeedbackDisplay */}
@@ -39,7 +48,13 @@ const ParentComponent = () => {
             transition={{ duration: 0.5, ease: 'easeInOut' }}
             style={{ flexBasis: '33.3333%', flexGrow: 0, flexShrink: 0 }}
           >
-            <FeedbackDisplay feedback={feedbackList} />
+            <FeedbackDisplay
+              feedback={feedbackList}
+              setHoveredFeedbackId={setHoveredFeedbackId}
+              setSelectedFeedbackId={setSelectedFeedbackId}
+              hoveredFeedbackId={hoveredFeedbackId}
+              selectedFeedbackId={selectedFeedbackId}
+            />
           </motion.div>
         )}
       </AnimatePresence>

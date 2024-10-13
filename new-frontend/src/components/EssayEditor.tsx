@@ -26,13 +26,25 @@ const prompts = [
 
 interface EssayEditorProps {
   setFeedbackList: React.Dispatch<React.SetStateAction<FeedbackItem[]>>;
+  feedbackList: FeedbackItem[];
+  hoveredFeedbackId: number | null;
+  selectedFeedbackId: number | null;
+  setHoveredFeedbackId: (id: number | null) => void;
+  setSelectedFeedbackId: (id: number | null) => void;
 }
 
   // Add minimum and maximum character length
   const MIN_CHARACTERS = 125;
   const MAX_CHARACTERS = 7000;
 
-export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
+export default function EssayEditor({
+  setFeedbackList,
+  feedbackList,
+  hoveredFeedbackId,
+  selectedFeedbackId,
+  setHoveredFeedbackId,
+  setSelectedFeedbackId,
+}: EssayEditorProps) {
   const [selectedPrompt, setSelectedPrompt] = useState('');
   const [essay, setEssay] = useState('');
   const [isEditing, setIsEditing] = useState(true);
@@ -141,7 +153,16 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
       const regex = new RegExp(escapedKey, 'g');
 
       // Alternate between two shades of purple
-      const colorClass = index % 2 === 0 ? 'bg-purple-100' : 'bg-blue-100';
+      const color = index % 2 === 0 ? 'blue' : 'purple';
+
+      let colorClass = `bg-${color}-100`
+
+      if (selectedFeedbackId == index) {
+        colorClass = `bg-${color}-500 text-white`
+      } else if (hoveredFeedbackId == index) {
+        colorClass = `bg-${color}-300`
+      }
+      
 
       highlightedText = highlightedText.replace(
         regex,
@@ -154,8 +175,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
   // Calculate essay length and determine if it's valid
   const essayLength = essay.length;
   const isEssayValid = essayLength >= MIN_CHARACTERS && essayLength <= MAX_CHARACTERS;
-
-
+  
   return (
     <div className="flex-grow flex flex-col items-center p-4">
       <motion.div

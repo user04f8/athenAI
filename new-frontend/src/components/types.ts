@@ -1,4 +1,5 @@
 export interface FeedbackItem {
-    id: number;
-    text: string;
-  }
+  id: number;
+  text: string;
+  highlightKey?: string;
+}
