@@ -214,4 +214,9 @@ Example of Final Output:
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    debug = os.getenv('debug')
+    if debug is None or debug.upper() == 'true':
+        debug = True
+    else:
+        debug = False
+    app.run(debug=debug)

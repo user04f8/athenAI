@@ -18,7 +18,7 @@ const baseQuestions: string[] = [
   "Tell me about yourself.",
   "What are your aspirations after highschool?",
   "Do you participate in any extracurricular activities? Tell me about them.",
-  "What do you indend to major in?"
+  "What do you intend to major in?"
   // "Have you thought about any specific colleges you'd like to apply to?"
 ]
 
