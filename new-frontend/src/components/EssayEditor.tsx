@@ -127,7 +127,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
       const regex = new RegExp(escapedKey, 'g');
 
       // Alternate between two shades of purple
-      const colorClass = index % 2 === 0 ? 'bg-purple-300' : 'bg-blue-300';
+      const colorClass = index % 2 === 0 ? 'bg-purple-100' : 'bg-blue-100';
 
       highlightedText = highlightedText.replace(
         regex,
