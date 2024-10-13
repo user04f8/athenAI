@@ -28,6 +28,10 @@ interface EssayEditorProps {
   setFeedbackList: React.Dispatch<React.SetStateAction<FeedbackItem[]>>;
 }
 
+  // Add minimum and maximum character length
+  const MIN_CHARACTERS = 125;
+  const MAX_CHARACTERS = 7000;
+
 export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
   const [selectedPrompt, setSelectedPrompt] = useState('');
   const [essay, setEssay] = useState('');
@@ -147,6 +151,11 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
     return highlightedText;
   }
 
+  // Calculate essay length and determine if it's valid
+  const essayLength = essay.length;
+  const isEssayValid = essayLength >= MIN_CHARACTERS && essayLength <= MAX_CHARACTERS;
+
+
   return (
     <div className="flex-grow flex flex-col items-center p-4">
       <motion.div
@@ -154,7 +163,7 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-2/3 bg-white rounded-lg shadow-2xl p-8"
-        >
+      >
         <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">
           Essay Editor
         </h2>
@@ -208,10 +217,20 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
             )}
           </div>
 
+          <div className="text-sm text-gray-600">
+            {essayLength < MIN_CHARACTERS && (
+              <p>Essay must be at least {MIN_CHARACTERS} characters. You need {MIN_CHARACTERS - essayLength} more.</p>
+            )}
+            {essayLength > MAX_CHARACTERS && (
+              <p>Essay must be less than {MAX_CHARACTERS} characters. You need to remove {essayLength - MAX_CHARACTERS} characters.</p>
+            )}
+          </div>
+
           {isEditing ? (
             <Button
               onClick={handleGenerateFeedback}
               className="w-full px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:from-purple-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center"
+              disabled={!isEssayValid} // Disable button if essay length is invalid
             >
               <FileText className="mr-2 h-5 w-5" />
               <span>Generate Feedback</span>
