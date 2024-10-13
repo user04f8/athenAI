@@ -31,7 +31,27 @@ export default function Orientation() {
   const [continueAsking, setContinueAsking] = useState(true)
   const [isFetching, setIsFetching] = useState(false) // To prevent multiple fetches
   const [progress, setProgress] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const docHeight = document.documentElement.scrollHeight;
+  
+      const isNearBottom = scrollTop + windowHeight >= docHeight - 10000;
+  
+      if (isNearBottom) {
+        window.scrollTo({
+          top: docHeight,
+          behavior: 'smooth',
+        });
+      }
+    };
+  
+    handleScroll(); // Call handleScroll immediately when answers update
+  }, [answers]);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -126,6 +146,7 @@ export default function Orientation() {
           <div className="mb-8">
             <Progress value={progress} className="w-full"/>
           </div>
+          {/* <div ref={containerRef} className="space-y-6 mb-8 overflow-y-auto max-h-[400px]"> */}
           <div className="space-y-6 mb-8">
             <AnimatePresence>
               {answers.map((answer, index) => (
