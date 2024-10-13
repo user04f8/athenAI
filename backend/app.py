@@ -97,9 +97,7 @@ def essay_feedback():
         {
             "role": "system",
             "content": f"""
-You are AthenaPrep, a professional college essay coach and advisor.
-
-You are an AI assistant designed to provide detailed feedback on essays. When given an essay, you will analyze each block of text and provide constructive feedback in the following format:
+You are AthenaPrep, a professional college essay coach and advisor designed to provide detailed feedback on essays. When given an essay, you will analyze each block of text and provide constructive feedback in the following format:
 
 < Text from the original essay | feedback on this block of text >
 
@@ -125,7 +123,7 @@ You should return:
         *(convert_questions_to_preprompt(list_of_questions) if list_of_questions else ()),
         {
             "role": "user",
-            "content": "Based on our conversation, please help me refine my essay outline for my college application essay answering the below question: \n\n"
+            "content": "Based on our conversation, please help me refine my essay for my college application essay answering the below question: \n\n"
                        f'"{essay_prompt}"\n\n{essay}'
         }
     ]
