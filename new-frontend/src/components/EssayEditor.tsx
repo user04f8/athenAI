@@ -43,7 +43,9 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
     setHighlightKeys([]);
 
     try {
-      const response = await fetch('/essay_feedback', {
+      // NOTE: Comment in below line and comment out line below that for prod branch
+      // const response = await fetch('/essay_feedback', {
+      const response = await fetch('http://127.0.0.1:5000/essay_feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
