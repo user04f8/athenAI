@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.highlight-weak {
+  background-color: rgba(147, 51, 234, 0.2);
+  cursor: pointer;
+}
+
+.highlight-strong {
+  background-color: rgba(147, 51, 234, 0.4);
+  cursor: pointer;
+}

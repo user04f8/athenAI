@@ -32,7 +32,7 @@ export default function EssayEditor() {
   const [essay, setEssay] = useState('')
 
   const handleGenerateFeedback = () => {
-    // Implement feedback generation logic here
+    // api call here
     console.log('Generating feedback for:', { selectedPrompt, essay })
     console.log(Object.values(testOutput))
   }
