@@ -48,7 +48,7 @@ export default function TestEssayEditor() {
             console.error('Error fetching data:', error)
           }
       }
-    //   getAPIEndpoint('essay_feedback', setResponseText)
+      getAPIEndpoint('essay_feedback', setResponseText)
 
       getAPIEndpoint('essay_overall_feedback', setOverallFeedbackResponseText)
       
