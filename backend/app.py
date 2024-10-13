@@ -224,6 +224,10 @@ def serve_react_app(path):
         print('ajskdfljksdjlksadjksakljsadfljfdsaklkjfdljskdfljk')
         return send_from_directory(app.static_folder, 'index.html')
 
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
     debug = os.getenv('debug')
     if debug is None or debug.upper() == 'true':
