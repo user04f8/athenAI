@@ -152,7 +152,7 @@ export default function Orientation() {
             >
               <div className="flex items-center mb-3">
                 <div className="flex-shrink-0 mr-2">
-                  <Bot className="text-gray-800 w-7 h-7" aria-hidden="true" />
+                   <img src="../../src/assets/images/owl.png" alt="Custom Icon" className="h-9 w-9" />
                 </div>
                 <p className="font-semibold text-gray-800 text-lg">{isFetching ? "..." : displayedQuestion}</p>
               </div>
