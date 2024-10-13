@@ -38,7 +38,7 @@ export default function EssayEditor() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 flex flex-col font-sans">
+    <div className="bg-white rounded-lg shadow-2xl border border-gray-200 h-full">
       <Navbar />
 
       <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">
