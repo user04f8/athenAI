@@ -19,11 +19,10 @@ const ParentComponent = () => {
       {/* EssayEditor */}
       <motion.div
         key="editor"
-        className={`flex flex-col ${
-          hasFeedback ? 'w-full md:w-2/3' : 'w-full'
-        }`}
-        layout
+        className="flex flex-col"
+        animate={{ flexBasis: hasFeedback ? '66.6667%' : '100%' }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
+        style={{ flexGrow: 0, flexShrink: 0 }}
       >
         <EssayEditor setFeedbackList={setFeedbackList} />
       </motion.div>
@@ -33,12 +32,12 @@ const ParentComponent = () => {
         {hasFeedback && (
           <motion.div
             key="feedback"
-            className="flex flex-col justify-center w-full md:w-1/3"
+            className="flex flex-col justify-center"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            layout
+            style={{ flexBasis: '33.3333%', flexGrow: 0, flexShrink: 0 }}
           >
             <FeedbackDisplay feedback={feedbackList} />
           </motion.div>
