@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight, Bot } from 'lucide-react'
 import { Progress } from './ui/progress'
-
+import owlIcon from "../../src/assets/images/owl.png"
 
 const TOTAL_QUESTIONS = 16
 
@@ -18,7 +18,7 @@ const baseQuestions: string[] = [
   "Tell me about yourself.",
   "What are your aspirations after highschool?",
   "Do you participate in any extracurricular activities? Tell me about them.",
-  "What do you indend to major in?"
+  "What do you intend to major in?"
   // "Have you thought about any specific colleges you'd like to apply to?"
 ]
 
@@ -152,7 +152,7 @@ export default function Orientation() {
             >
               <div className="flex items-center mb-3">
                 <div className="flex-shrink-0 mr-2">
-                   <img src="../../src/assets/images/owl.png" alt="Custom Icon" className="h-9 w-9" />
+                   <img src={owlIcon} alt="Athena the Owl" className="h-9 w-9" />
                 </div>
                 <p className="font-semibold text-gray-800 text-lg">{isFetching ? "..." : displayedQuestion}</p>
               </div>

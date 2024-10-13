@@ -1,9 +1,8 @@
 {
   "dependencies": {
-    "vite": "^5.4.8",
-    "@vitejs/plugin-react": "^4.3.2"
+    "serve": "^14.2.0"
   },
   "scripts": {
-    "heroku-postbuild": "npm install --prefix new-frontend"
+    "heroku-postbuild": "cd new-frontend && npm install && npm run build"
   }
 }

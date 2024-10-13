@@ -1,1 +1,1 @@
-web: npm --prefix new-frontend run dev
+web: serve -s new-frontend/dist
