@@ -32,13 +32,13 @@ export default function EssayEditor() {
   const [essay, setEssay] = useState('')
 
   const handleGenerateFeedback = () => {
-    // Implement feedback generation logic here
+    // api call here
     console.log('Generating feedback for:', { selectedPrompt, essay })
     console.log(Object.values(testOutput))
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-100 flex flex-col font-sans">
+    <div className="bg-white rounded-lg shadow-2xl border border-gray-200 h-full">
       <Navbar />
 
       <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">

@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Onboarding from './components/Onboarding'
-import EssayEditor from './components/EssayEditor';
+import EssayEditor from './components/ParentEditor';
 import TestEssayEditor from './components/TestEssayEditor'
 
 function App() {
