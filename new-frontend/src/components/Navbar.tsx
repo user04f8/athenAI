@@ -18,11 +18,11 @@ export default function Navbar({ selected }: NavbarProps) {
 
   return (
     <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <BookOpen className="h-8 w-8 text-purple-500" />
+            <img src="../../src/assets/images/owl.png" alt="Custom Icon" className="h-8 w-8" />
               <span className="ml-2 text-xl font-bold text-purple-600">AthenaPrep</span>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
