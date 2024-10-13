@@ -3,7 +3,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "You may wish to include an additional essay if you feel that the college application forms do not provide sufficient opportunity to convey important information about yourself or your accomplishments. You may write on a topic of your choice, or you may choose from one of the following topics: Unusual circumstances in your life Travel, living, or working experiences in your own or other communities What you would want your future college roommate to know about you – An intellectual experience (course, project, book, discussion, paper, poetry, or research topic in engineering, mathematics, science or other modes of inquiry) that has meant the most to you How you hope to use your college education A list of books you have read during the past twelve months"
             },
             {
                 "role": "assistant",
@@ -27,7 +27,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Metaphor Essay"
             },
             {
                 "role": "assistant",
@@ -39,7 +39,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "What are your current postgraduate/career plans? (500 words)"
             },
             {
                 "role": "assistant",
@@ -51,7 +51,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Please indicate your field of specialization and briefly outline your academic plans at Harvard College. (500 words)"
             },
             {
                 "role": "assistant",
@@ -63,7 +63,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Please briefly elaborate on one of your extracurricular activities or work experiences. (150 words)"
             },
             {
                 "role": "assistant",
@@ -75,7 +75,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Your intellectual life may extend beyond the academic requirements of your particular school. Please use the space below to list additional intellectual activities that you have not mentioned or detailed elsewhere in your application. These could include, but are not limited to, supervised or self-directed projects not done as school work, training experiences, online courses not run by your school, or summer academic or research programs not described elsewhere. (150 words)"
             },
             {
                 "role": "assistant",
@@ -99,7 +99,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Please briefly elaborate on one of your extracurricular activities or work experiences. (150 words)"
             },
             {
                 "role": "assistant",
@@ -111,19 +111,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
-            },
-            {
-                "role": "assistant",
-                "content": ""
-            }
-        ]
-    },
-    {
-        "messages": [
-            {
-                "role": "user",
-                "content": ""
+                "content": "An intellectual experience (course, project, book, discussion, paper, poetry, or research topic in engineering, mathematics, science or other modes of inquiry) that has meant the most to you OR travel, living, or working experiences in your own or other communities"
             },
             {
                 "role": "assistant",
@@ -147,7 +135,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Briefly discuss one book that has strongly influenced you. (500 words)"
             },
             {
                 "role": "assistant",
@@ -159,7 +147,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Each year a substantial number of students admitted to Harvard defer their admission for one year or take time off during college. If you decided in the future to choose either option, what would you like to do?"
             },
             {
                 "role": "assistant",
@@ -183,7 +171,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Please briefly elaborate on one of your extracurricular activities or work experiences. (150 words)"
             },
             {
                 "role": "assistant",
@@ -195,7 +183,7 @@
         "messages": [
             {
                 "role": "user",
-                "content": ""
+                "content": "Harvard has long recognized the importance of student body diversity of all kinds. We welcome you to write about distinctive aspects of your background, personal development or the intellectual interests you might bring to your Harvard classmates"
             },
             {
                 "role": "assistant",
