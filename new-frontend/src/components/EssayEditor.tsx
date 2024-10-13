@@ -117,7 +117,8 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
     let highlightedText = essay;
 
     // Sort keys by length to prevent nested highlights
-    const sortedKeys = [...highlightKeys].sort((a, b) => b.length - a.length);
+    const sortedKeys = [...highlightKeys]
+    // .sort((a, b) => b.length - a.length);
 
     sortedKeys.forEach((key, index) => {
       const escapedKey = key.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&'); // Escape regex special characters
