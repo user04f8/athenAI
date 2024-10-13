@@ -1,1 +1,1 @@
-web: npm --prefix new-frontend run prod
+web: gunicorn app:app --chdir backend

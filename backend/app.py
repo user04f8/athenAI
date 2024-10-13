@@ -2,7 +2,7 @@ from typing import Literal
 from dotenv import load_dotenv
 import openai
 import os
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response, request, jsonify, send_from_directory
 from flask_cors import CORS
 import sys
 
@@ -14,9 +14,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 client = openai.OpenAI()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../new-frontend/dist', static_url_path='')
 CORS(app)
 # NOTE: for security eventually should do resources={r"/generate_question": {"origins": "http://localhost:3000"}} etc.
+
 
 @app.route('/generate_question', methods=['POST'])
 def generate_question():
@@ -212,6 +213,20 @@ Example of Final Output:
 
     return Response(generate(), mimetype='text/event-stream')
 
+
+# Static hosting NOTE this is temporary I hope
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react_app(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        print('ajskdfljksdjlksadjksakljsadfljfdsaklkjfdljskdfljk')
+        return send_from_directory(app.static_folder, 'index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     debug = os.getenv('debug')
