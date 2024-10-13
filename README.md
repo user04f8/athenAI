@@ -90,6 +90,3 @@ AthenaPrep is an AI-driven platform designed to help students with college admis
 - Navigate to the **About** page to learn more about AthenaPrep’s mission and features.
 - Use the **Essay Feedback** tool by inputting your essay to receive comprehensive feedback.
 - Explore the **Interactive Orientation** to refine your college selection and application strategy.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
