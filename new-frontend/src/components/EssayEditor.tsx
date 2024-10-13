@@ -153,13 +153,13 @@ export default function EssayEditor({
       const regex = new RegExp(escapedKey, 'g');
 
       // Alternate between two shades of purple
-      const color = index % 2 === 0 ? 'blue' : 'purple';
+      const color = index % 2 === 0 ? 'purple' : 'blue';
 
       let colorClass = `bg-${color}-100`
 
-      if (selectedFeedbackId == index) {
+      if (selectedFeedbackId == index + 1) {
         colorClass = `bg-${color}-500 text-white`
-      } else if (hoveredFeedbackId == index) {
+      } else if (hoveredFeedbackId == index + 1) {
         colorClass = `bg-${color}-300`
       }
       
