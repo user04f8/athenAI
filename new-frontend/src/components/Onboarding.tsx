@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { Progress } from './ui/progress'
-
+import owlImage from '../../src/assets/images/owl.png'
 
 const TOTAL_QUESTIONS = 16
 
@@ -81,8 +81,8 @@ export default function Orientation() {
       const list_of_questions: QuestionWithResponse[] = answers.map((answer, index) => ({
         question: questions[index] ?? 'Question?',
         response: answer
-      }))
-      const response = await fetch('http://127.0.0.1:5000/generate_question', {
+      })) // NOTE: change for local dev
+      const response = await fetch('/generate_question', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ export default function Orientation() {
             >
               <div className="flex items-center mb-3">
                 <div className="flex-shrink-0 mr-2">
-                   <img src="../../src/assets/images/owl.png" alt="Custom Icon" className="h-9 w-9" />
+                   <img src={owlImage} alt="Custom Icon" className="h-9 w-9" />
                 </div>
                 <p className="font-semibold text-gray-800 text-lg">{isFetching ? "..." : displayedQuestion}</p>
               </div>
