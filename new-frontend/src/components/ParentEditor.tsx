@@ -14,7 +14,7 @@ const ParentComponent = () => {
 
   return (
     <div
-      className={`flex h-screen p-4 overflow-hidden ${
+      className={`flex h-max-[400px] p-4 overflow-hidden ${
         hasFeedback ? 'flex-col md:flex-row' : 'flex-col'
       }`}
     >

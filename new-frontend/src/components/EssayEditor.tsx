@@ -111,7 +111,7 @@ export default function EssayEditor({
               hasFeedback = true
               setFeedbackList((prevList) => [
                 ...prevList,
-                { id: prevList.length + 1, text: valuePart },
+                { id: prevList.length + 1, text: (prevList.length + 1) +". "+ valuePart },
               ]);
 
               // Add key to highlightKeys
@@ -166,8 +166,9 @@ export default function EssayEditor({
 
       highlightedText = highlightedText.replace(
         regex,
-        `<mark class="${colorClass}">${key}</mark>`
+        `<mark class="${colorClass}">${key}</mark><sup>${index + 1}</sup>`
       );
+      
     });
     return highlightedText;
   }
@@ -226,13 +227,13 @@ export default function EssayEditor({
                 id="essay"
                 value={essay}
                 onChange={(e) => setEssay(e.target.value)}
-                className="w-full px-4 py-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 min-h-[400px] resize-y bg-purple-50 text-gray-900 placeholder-gray-400 transition duration-300 ease-in-out"
+                className="w-full px-4 py-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 h-[400px] resize-y bg-purple-50 text-gray-900 placeholder-gray-400 transition duration-300 ease-in-out"
                 placeholder="Start typing your essay here..."
               />
             ) : (
               <div
                 dangerouslySetInnerHTML={{ __html: renderEssayWithHighlights() }}
-                className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md h-[650px] overflow-y-auto"
+                className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md h-[400px] overflow-y-auto"
               />
             )}
           </div>
