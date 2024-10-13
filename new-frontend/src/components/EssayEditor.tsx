@@ -143,8 +143,8 @@ export default function EssayEditor({ setFeedbackList }: EssayEditorProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-4xl bg-white rounded-lg shadow-2xl p-8"
-      >
+        className="w-full max-w-2/3 bg-white rounded-lg shadow-2xl p-8"
+        >
         <h2 className="text-3xl font-bold mb-6 text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-600">
           Essay Editor
         </h2>

@@ -12,35 +12,33 @@ const ParentComponent = () => {
 
   return (
     <div
-      className={`flex flex-col h-screen p-4 overflow-hidden ${
-        hasFeedback ? 'md:flex-row' : 'items-center'
+      className={`flex h-screen p-4 overflow-hidden ${
+        hasFeedback ? 'flex-col md:flex-row' : 'flex-col'
       }`}
     >
-      <AnimatePresence>
-        {/* EssayEditor */}
-        <motion.div
-          key="editor"
-          className="flex flex-col"
-          layout
-          initial={{ width: '100%' }}
-          animate={{ width: hasFeedback ? '66%' : '100%' }}
-          transition={{ duration: 1.5, ease: 'easeInOut' }}
-          style={{ minWidth: 0 }}
-        >
-          <EssayEditor setFeedbackList={setFeedbackList} />
-        </motion.div>
+      {/* EssayEditor */}
+      <motion.div
+        key="editor"
+        className={`flex flex-col ${
+          hasFeedback ? 'w-full md:w-2/3' : 'w-full'
+        }`}
+        layout
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      >
+        <EssayEditor setFeedbackList={setFeedbackList} />
+      </motion.div>
 
-        {/* FeedbackDisplay */}
+      {/* FeedbackDisplay */}
+      <AnimatePresence>
         {hasFeedback && (
           <motion.div
             key="feedback"
-            className="flex flex-col justify-center"
+            className="flex flex-col justify-center w-full md:w-1/3"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
             layout
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: '34%', opacity: 1 }}
-            exit={{ width: 0, opacity: 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-            style={{ minWidth: 0 }}
           >
             <FeedbackDisplay feedback={feedbackList} />
           </motion.div>
