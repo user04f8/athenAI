@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from './ui/select';
 import { FeedbackItem } from './types';
+import ReactStringReplace from 'react-string-replace';
 
 const prompts = [
   "Some students have a background, identity, interest, or talent that is so meaningful they believe their application would be incomplete without it. If this sounds like you, then please share your story.",
@@ -142,35 +143,67 @@ export default function EssayEditor({
   };
 
   function renderEssayWithHighlights() {
-    let highlightedText = essay;
-
+    const output = []; // To store the final output as an array of strings and React elements
+    let remainingText = essay; // Start with the entire essay as remaining text
+    let currentIndex = 0; // Current position in the essay
+  
     // Sort keys by length to prevent nested highlights
-    const sortedKeys = [...highlightKeys]
+    const sortedKeys = [...highlightKeys];
     // .sort((a, b) => b.length - a.length);
-
+  
+    // Process each highlight key
     sortedKeys.forEach((key, index) => {
       const escapedKey = key.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&'); // Escape regex special characters
       const regex = new RegExp(escapedKey, 'g');
-
-      // Alternate between two shades of purple
-      const color = index % 2 === 0 ? 'purple' : 'blue';
-
-      let colorClass = `bg-${color}-100`
-
-      if (selectedFeedbackId == index + 1) {
-        colorClass = `bg-${color}-500 text-white`
-      } else if (hoveredFeedbackId == index + 1) {
-        colorClass = `bg-${color}-300`
-      }
-      
-
-      highlightedText = highlightedText.replace(
-        regex,
-        `<mark class="${colorClass}">${key}</mark><sup>${index + 1}</sup>`
-      );
-      
+      const matches = [...remainingText.matchAll(regex)]; // Find all matches for the key in remaining text
+  
+      matches.forEach((match, matchIndex) => {
+        const start = match.index ?? 0;
+        const end = start + match[0].length;
+  
+        // Add any non-matched text before this match
+        if (start > currentIndex) {
+          output.push(remainingText.slice(currentIndex, start));
+        }
+  
+        // Alternate between two shades
+        const color = index % 2 === 0 ? 'purple' : 'blue';
+        let colorClass = `bg-${color}-100`;
+        if (selectedFeedbackId === index + 1) {
+          colorClass = `bg-${color}-500 text-white`;
+        } else if (hoveredFeedbackId === index + 1) {
+          colorClass = `bg-${color}-300`;
+        }
+  
+        // Add the matched text with highlight
+        output.push(
+          <mark
+            key={`highlight-${index}-${matchIndex}`}
+            className={colorClass}
+            onMouseEnter={() => setHoveredFeedbackId(index + 1)}
+            onMouseLeave={() => setHoveredFeedbackId(null)}
+            onClick={() => setSelectedFeedbackId(index + 1)}
+          >
+            {remainingText.slice(start, end)}
+            <sup>{index + 1}</sup>
+          </mark>
+        );
+  
+        // Update currentIndex to the end of the match
+        currentIndex = end;
+      });
+  
+      // After processing, update remainingText to the rest after currentIndex
+      remainingText = remainingText.slice(currentIndex);
+      currentIndex = 0; // Reset currentIndex for the next highlight key
     });
-    return highlightedText;
+  
+    // Append any remaining text that didn't match any highlight key
+    if (remainingText) {
+      output.push(remainingText);
+    }
+  
+    return output;
   }
 
   // Calculate essay length and determine if it's valid
@@ -232,9 +265,12 @@ export default function EssayEditor({
               />
             ) : (
               <div
-                dangerouslySetInnerHTML={{ __html: renderEssayWithHighlights() }}
+                // dangerouslySetInnerHTML={{ __html:  }}
                 className="prose max-w-full text-gray-900 bg-purple-50 p-4 rounded-md h-[400px] overflow-y-auto"
-              />
+                onMouseLeave={() => setHoveredFeedbackId(null)}
+              >
+{renderEssayWithHighlights()}
+                </div>
             )}
           </div>
 
