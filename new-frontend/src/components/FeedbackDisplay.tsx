@@ -22,20 +22,20 @@ const exampleFeedback: FeedbackItem[] = [
 ];
 
 export default function FeedbackDisplay({ feedback = exampleFeedback }: FeedbackDisplayProps) {
-  return (
-    <Card className="bg-white rounded-lg shadow-2xl border border-purple-200 h-full">
-      <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-t-lg">
+return (
+    <Card className="bg-white rounded-lg shadow-2xl border border-purple-200">
+    <CardHeader className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-t-lg">
         <CardTitle className="text-2xl font-bold">Feedback</CardTitle>
-      </CardHeader>
-      <CardContent className="p-4 h-full">
-        <ScrollArea className="h-full pr-4">
-          {feedback.map((item) => (
+    </CardHeader>
+    <CardContent className="p-4">
+        <ScrollArea className="max-h-[80vh] overflow-y-auto pr-4">
+        {feedback.map((item) => (
             <div key={item.id} className="mb-4 p-3 bg-purple-50 rounded-lg shadow-sm border border-purple-100">
-              <p className="text-sm text-gray-700">{item.text}</p>
+            <p className="text-sm text-gray-700">{item.text}</p>
             </div>
-          ))}
+        ))}
         </ScrollArea>
-      </CardContent>
+    </CardContent>
     </Card>
-  );
+);
 }

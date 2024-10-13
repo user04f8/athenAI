@@ -38,9 +38,6 @@ export default function EssayEditor() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-2xl border border-gray-200 h-full">
-      <Navbar />
-
       <div className="flex-grow flex flex-col items-center justify-center p-4 mt-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,6 +85,5 @@ export default function EssayEditor() {
           </div>
         </motion.div>
       </div>
-    </div>
   )
 }
