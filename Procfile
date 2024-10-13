@@ -1,0 +1,1 @@
+web: cd backend && pip install -r requirements.txt && cd ../new-frontend && npm install && npm run dev
