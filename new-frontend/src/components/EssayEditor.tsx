@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from "./ui/select"
 
+const testOutput = {"When I think about my future in computer science, I envision myself working at the intersection of technology and society. I want to not only develop innovative AI systems but also apply them to solve real-world challenges in urban environments. New York University, with its unique combination of academic rigor, urban location, and interdisciplinary focus, stands out to me as the ideal place to pursue these ambitions. ": "Consider mentioning how NYU's specific programs or courses align with your vision. This could help strengthen the connection between your goals and what NYU specifically offers", "One of the key reasons I’m drawn to NYU is its renowned Courant Institute of Mathematical Sciences, which has an outstanding reputation in computer science, especially in the areas of artificial intelligence and machine learning": "It would benefit your argument to mention any specific professors or projects at the Courant Institute that align with your interests.", "These fields are my passion, and I’m eager to learn from faculty members who are at the forefront of AI research. Access to this level of expertise, combined with NYU’s interdisciplinary programs, will give me the tools to explore the deeper societal implications of technology, something I find increasingly important.": "Good connection here; you may want to provide a specific example of how NYU’s programs integrate societal impacts with technology"}
+
 // these are taken directly from common app
 const prompts = [
   "Some students have a background, identity, interest, or talent that is so meaningful they believe their application would be incomplete without it. If this sounds like you, then please share your story.",
@@ -32,6 +34,7 @@ export default function EssayEditor() {
   const handleGenerateFeedback = () => {
     // Implement feedback generation logic here
     console.log('Generating feedback for:', { selectedPrompt, essay })
+    console.log(Object.values(testOutput))
   }
 
   return (
