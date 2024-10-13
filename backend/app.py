@@ -111,7 +111,7 @@ As an example, for the following input essay:
 
 You should return:
 
-< I have always been fascinated by the stars. | This is a strong opening that immediately introduces your passion. Consider adding a vivid anecdote to draw the reader in even more. >
+< I have always been fascinated by the stars. | Strong opening. Consider adding a vivid anecdote to draw the reader in even more. >
 
 < Ever since I was a child, I would spend nights gazing up at the sky, wondering what lies beyond our planet. | Good continuation that adds depth. Describing specific memories or feelings during these stargazing moments could enhance the emotional connection. >
 
