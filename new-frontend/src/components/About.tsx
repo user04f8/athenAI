@@ -13,13 +13,13 @@ export default function About() {
                     About Us
                 </h2>
                 <p className="text-gray-600 mb-4">
-                    We are a dedicated group of students participating in HackHarvard 2024, driven by a shared vision to make the college admissions process more equitable and accessible for everyone. Our product, AthenaPrep, is inspired by the goddess of knowledge, Athena, and embodies the pursuit of wisdom and fairness in education.
+                    We are a dedicated group of machine learning researchers and college advisors driven by a shared vision to make the college admissions process more equitable and accessible for everyone. The name AthenaPrep is inspired by the goddess of knowledge, Athena, and embodies the pursuit of wisdom and fairness in education.
                 </p>
                 <p className="text-gray-600 mb-4">
                     <strong>Our Mission</strong>: At AthenaPrep, we believe that every student deserves access to quality college preparation resources, regardless of their financial background. While traditional college counseling services can be highly effective, they are often out of reach for many families due to high costs. Our goal is to offer an affordable alternative that provides valuable guidance, particularly for those who may not have the budget for private counseling services.
                 </p>
                 <p className="text-gray-600 mb-4">
-                    We are committed to providing a platform that offers meaningful support for college-bound students, particularly in the area of essay writing. Even if we don’t replace traditional services, we aim to complement them by offering a valuable and affordable option for families seeking high-quality assistance without the financial burden.
+                    We are committed to providing a platform that offers meaningful support for college-bound students, particularly in the area of essay writing. We aim to complement existing resources by offering a valuable and affordable option for families seeking high-quality assistance without the financial burden, giving students the power to tell their story as effectively as possible.
                 </p>
                 <p className="text-gray-600 mb-4">
                     <strong>What We Offer</strong>:
@@ -29,7 +29,7 @@ export default function About() {
                         <strong>Orientation:</strong> Through a series of interactive prompts, AthenaPrep engages students in thoughtful discussions, helping them narrow down their college options and guiding them through the key elements of their applications. Acting as a virtual counselor, AthenaPrep ensures that students feel supported as they make critical decisions.
                     </li>
                     <li>
-                        <strong>Essay Editing:</strong> AthenaPrep allows students to input their essays and receive comprehensive feedback. Rather than doing the work for them, the LLM provides detailed commentary on both the overall structure and specific sections of the essay, helping students craft responses that are more compelling and tailored to what admissions officers are looking for.
+                        <strong>Essay Editing:</strong> AthenaPrep allows students to input their essays and receive comprehensive feedback, helping students craft responses that are more compelling and tailored to what admissions officers are looking for.
                     </li>
                 </ul>
                 <p className="text-gray-600">
